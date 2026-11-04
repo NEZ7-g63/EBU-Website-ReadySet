@@ -1,0 +1,27 @@
+# Blueprint deploy cho Render (render.com/docs/blueprint-spec) — cho phép bấm
+# "New +" → "Blueprint" trên Render, trỏ tới repo GitHub chứa code này, Render
+# tự đọc file này và điền sẵn cấu hình, chỉ còn thiếu các giá trị bí mật (đánh
+# dấu sync: false bên dưới) phải tự nhập tay trong dashboard — không commit
+# giá trị thật vào đây.
+services:
+  - type: web
+    name: readyset-web
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 20.18.0
+      - key: RESEND_API_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: SESSION_SECRET
+        sync: false
+      - key: RESEND_CUSTOMER_FROM
+        sync: false
