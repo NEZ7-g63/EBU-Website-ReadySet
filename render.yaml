@@ -5,7 +5,7 @@
 # giá trị thật vào đây.
 services:
   - type: web
-    name: readyset-web
+    name: readyset
     runtime: node
     plan: free
     buildCommand: npm install && npm run build
