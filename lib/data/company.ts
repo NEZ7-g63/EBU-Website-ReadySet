@@ -1,6 +1,6 @@
 export const company = {
   /** Domain web đã deploy — dùng cho metadata, canonical, sitemap, robots. */
-  siteUrl: "https://readyset.onrender.com",
+  siteUrl: "https://readyset-web.onrender.com",
   email: "doquochung251205@gmail.com",
   /**
    * Instagram của nhóm — để null khi chưa có, mọi chỗ hiện Instagram (footer, nút nổi,
