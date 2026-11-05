@@ -230,6 +230,48 @@ export const SEED_PRODUCTS: RawProduct[] = [
     ],
   },
   {
+    code: "RSL",
+    title: "READY SET RS CIRCLE LONG SLEEVE TEE",
+    handle: "ready-set-rs-circle-long-sleeve-tee",
+    category: "Tops",
+    tags: ["cotton", "tee", "long-sleeve"],
+    price: 460000, // TẠM: chưa có giá thật, đang lấy bằng giá áo thun Faded Grey — sửa lại khi chốt giá
+    tones: ["ink", "ink"],
+    labels: ["FRONT", "BACK"],
+    sizes: ["1", "2", "3"],
+    unavailableSizes: [],
+    sizeChart: [], // chưa có số đo thật
+    material: "Cotton 220gsm",
+    materialEn: "220gsm cotton",
+    care: "Giặt máy nước lạnh, lộn trái trước khi giặt",
+    careEn: "Machine wash cold, inside out",
+    fit: "Oversized",
+    modelInfo: "",
+    modelInfoEn: "",
+    collections: ["all", "tops", "new"],
+    createdAt: "2026-11-05",
+    descriptionVi:
+      "Áo thun tay dài màu đen, form oversized, in logo RS hiệu ứng bạc màu ở ngực và dòng chữ READY SET ở lưng.",
+    descriptionEn:
+      "Black long-sleeve tee in an oversized fit, with a distressed RS circle logo on the chest and a READY SET print on the back.",
+    details: [
+      "Màu: Đen (Black)",
+      "Form: Oversized",
+      "Logo RS trong vòng tròn in hiệu ứng bạc màu ở ngực",
+      "Chữ READY SET in ở lưng",
+      "Dòng chữ \"READY, SET, GO.\" in dọc hai tay áo",
+      "Nhãn READY SET ở cổ áo",
+    ],
+    detailsEn: [
+      "Color: Black",
+      "Fit: Oversized",
+      "Distressed RS circle logo print on the chest",
+      "READY SET print on the back",
+      "\"READY, SET, GO.\" printed down both sleeves",
+      "READY SET neck label",
+    ],
+  },
+  {
     code: "OLF",
     title: '"OLF" SHADOW FLIP BEANIE',
     handle: "olf-shadow-flip-beanie",
