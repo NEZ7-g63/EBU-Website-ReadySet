@@ -47,11 +47,6 @@ const MIDNIGHT_SIZE_CHART: SizeChartRow[] = [
   { size: "2", waist: "88 cm", length: "110 cm", thigh: "34 cm", legOpening: "29 cm" },
 ];
 
-const ECLIPSE_SIZE_CHART: SizeChartRow[] = [
-  { size: "1", waist: "78 cm", length: "103 cm", thigh: "30 cm", legOpening: "24 cm" },
-  { size: "2", waist: "82 cm", length: "105 cm", thigh: "31 cm", legOpening: "25 cm" },
-  { size: "3", waist: "88 cm", length: "108 cm", thigh: "32 cm", legOpening: "26 cm" },
-];
 export type RawProduct = {
   code: string;
   /** Tên sản phẩm đầy đủ, dùng nguyên văn làm title — không qua khuôn "25OC | <MÃ> <LOẠI>". */
@@ -145,53 +140,45 @@ export const SEED_PRODUCTS: RawProduct[] = [
     ],
   },
   {
-    code: "ECL",
-    title: "ECLIPSE STRAIGHT RAW DENIM PANT",
-    handle: "eclipse-straight-raw-denim-pant",
-    category: "Bottoms",
-    tags: ["denim", "raw", "straight"],
-    price: 825000,
-    tones: ["ink", "charcoal", "ink", "stone"],
-    labels: ["FRONT", "ON MODEL", "BACK", "DETAIL"],
+    code: "RSL",
+    title: "READY SET RS CIRCLE LONG SLEEVE TEE",
+    handle: "ready-set-rs-circle-long-sleeve-tee",
+    category: "Tops",
+    tags: ["cotton", "tee", "long-sleeve"],
+    price: 588000,
+    tones: ["ink", "ink"],
+    labels: ["FRONT", "BACK"],
     sizes: ["1", "2", "3"],
-    unavailableSizes: [], // ví dụ: ["1"] nếu hết size 1
-    sizeChart: ECLIPSE_SIZE_CHART,
-    material: "Vải raw denim đen, bề mặt mộc, đứng form",
-    materialEn: "Black raw denim, unwashed finish, stiff hand-feel",
-    care:
-      "Hạn chế giặt trong 3–6 tháng đầu để lên form và bạc màu tự nhiên Không giặt máy, không dùng chất tẩy mạnh. " +
-      "Vì sản phẩm được làm từ vải raw denim chưa qua xử lý, nên cách bảo quản sẽ khác một chút so với vải denim thông thường. Để hạn chế tình trạng vải bị co rút hoặc bạc màu, mỗi đơn hàng shop đều gửi kèm một tờ CARE TAG hướng dẫn cách giặt và bảo quản quần. Bạn đọc và lưu ý giúp shop nhé ạ.",
-    careEn:
-      "Avoid washing for the first 3–6 months to let the denim break in and fade naturally. No machine wash, no harsh detergents. " +
-      "Because this piece is made from untreated raw denim, care is a little different from regular denim. To help prevent shrinking or uneven fading, every order ships with a CARE TAG with washing and care instructions — please read and keep it handy.",
-    fit: "Regular", // form ống đứng/straight fit — xem chi tiết trong "details" bên dưới, trường này chỉ nhận Slim/Regular/Oversized
-    modelInfo: "Model cao 1m69, nặng 50kg, mặc size 1",
-    modelInfoEn: "Model is 169cm / 50kg, wearing size 1",
-    collections: ["all", "bottoms", "new"],
-    createdAt: "2026-08-30",
+    unavailableSizes: [],
+    sizeChart: [], // chưa có số đo thật
+    material: "Cotton 220gsm",
+    materialEn: "220gsm cotton",
+    care: "Giặt máy nước lạnh, lộn trái trước khi giặt",
+    careEn: "Machine wash cold, inside out",
+    fit: "Oversized",
+    modelInfo: "",
+    modelInfoEn: "",
+    collections: ["all", "tops", "new"],
+    createdAt: "2026-11-05",
+    descriptionVi:
+      "Áo thun tay dài màu đen, form oversized, in logo RS hiệu ứng bạc màu ở ngực và dòng chữ READY SET ở lưng.",
+    descriptionEn:
+      "Black long-sleeve tee in an oversized fit, with a distressed RS circle logo on the chest and a READY SET print on the back.",
     details: [
-      "Màu: Black",
-      "Form: Straight fit",
-      "YKK zipper",
-      "Zipper tape được xử lý bọc viền tỉ mỉ",
-      "Cúc kim loại donut READY SET",
-      "Signature baby blue tab",
-      "Signature strap phía trước",
-      "Stainless steel lighter clip ở túi sau",
-      "Distressed tự nhiên ở viền túi",
-      "Lót túi được làm toàn bộ bằng crinkle nylon",
+      "Màu: Đen (Black)",
+      "Form: Oversized",
+      "Logo RS trong vòng tròn in hiệu ứng bạc màu ở ngực",
+      "Chữ READY SET in ở lưng",
+      "Dòng chữ \"READY, SET, GO.\" in dọc hai tay áo",
+      "Nhãn READY SET ở cổ áo",
     ],
     detailsEn: [
       "Color: Black",
-      "Fit: Straight fit",
-      "YKK zipper",
-      "Zipper tape carefully edge-bound",
-      "READY SET donut metal button",
-      "Signature baby blue tab",
-      "Signature front strap",
-      "Stainless steel lighter clip on the back pocket",
-      "Natural distressing along the pocket edges",
-      "Pocket bags fully lined in crinkle nylon",
+      "Fit: Oversized",
+      "Distressed RS circle logo print on the chest",
+      "READY SET print on the back",
+      "\"READY, SET, GO.\" printed down both sleeves",
+      "READY SET neck label",
     ],
   },
   {
@@ -227,48 +214,6 @@ export const SEED_PRODUCTS: RawProduct[] = [
       "Fit: Oversized",
       "Pre-treated fabric, resists shrinking",
       "Faded & cracked print effect",
-    ],
-  },
-  {
-    code: "RSL",
-    title: "READY SET RS CIRCLE LONG SLEEVE TEE",
-    handle: "ready-set-rs-circle-long-sleeve-tee",
-    category: "Tops",
-    tags: ["cotton", "tee", "long-sleeve"],
-    price: 460000, // TẠM: chưa có giá thật, đang lấy bằng giá áo thun Faded Grey — sửa lại khi chốt giá
-    tones: ["ink", "ink"],
-    labels: ["FRONT", "BACK"],
-    sizes: ["1", "2", "3"],
-    unavailableSizes: [],
-    sizeChart: [], // chưa có số đo thật
-    material: "Cotton 220gsm",
-    materialEn: "220gsm cotton",
-    care: "Giặt máy nước lạnh, lộn trái trước khi giặt",
-    careEn: "Machine wash cold, inside out",
-    fit: "Oversized",
-    modelInfo: "",
-    modelInfoEn: "",
-    collections: ["all", "tops", "new"],
-    createdAt: "2026-11-05",
-    descriptionVi:
-      "Áo thun tay dài màu đen, form oversized, in logo RS hiệu ứng bạc màu ở ngực và dòng chữ READY SET ở lưng.",
-    descriptionEn:
-      "Black long-sleeve tee in an oversized fit, with a distressed RS circle logo on the chest and a READY SET print on the back.",
-    details: [
-      "Màu: Đen (Black)",
-      "Form: Oversized",
-      "Logo RS trong vòng tròn in hiệu ứng bạc màu ở ngực",
-      "Chữ READY SET in ở lưng",
-      "Dòng chữ \"READY, SET, GO.\" in dọc hai tay áo",
-      "Nhãn READY SET ở cổ áo",
-    ],
-    detailsEn: [
-      "Color: Black",
-      "Fit: Oversized",
-      "Distressed RS circle logo print on the chest",
-      "READY SET print on the back",
-      "\"READY, SET, GO.\" printed down both sleeves",
-      "READY SET neck label",
     ],
   },
   {
