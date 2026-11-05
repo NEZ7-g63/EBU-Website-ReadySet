@@ -44,6 +44,10 @@ export type SizeChartRow = {
   legOpening?: string;
   /** Chiều ngang thân đo phẳng (áo) — khác "chest" (vòng ngực đo tròn). */
   width?: string;
+  height?: string;
+  weight?: string;
+  shoulder?: string;
+  sleeve?: string;
 };
 
 export type Product = {

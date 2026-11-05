@@ -14,8 +14,8 @@ export const company = {
    * (mã tỉnh/thành = 1 trong lib/data/vietnamLocations.ts) và các tỉnh thành khác.
    * Dùng ở app/(shop)/checkout/page.tsx.
    */
-  shippingFeeHanoi: 18000,
-  shippingFeeOtherProvinces: 35000,
+  shippingFeeHanoi: 10000,
+  shippingFeeOtherProvinces: 30000,
   /** Số ngày được đổi/trả hàng kể từ khi nhận — dùng chung ở trang sản phẩm và trang chính sách, sửa 1 chỗ này là đủ. */
   returnWindowDays: 3,
   /**

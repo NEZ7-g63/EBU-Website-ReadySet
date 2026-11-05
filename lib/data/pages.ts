@@ -52,9 +52,8 @@ sections: [
       {
         heading: "Nếu phân vân giữa 2 size",
         paragraphs: [
-          "Với áo form Regular hoặc Slim: nên chọn size lớn hơn nếu thích mặc rộng rãi.",
-          "Với áo form Oversized: sản phẩm đã được thiết kế rộng sẵn, có thể giữ nguyên size theo số đo ngực.",
-          "Với quần denim: số size là vòng eo tính bằng inch (VD: size 30 = vòng eo ~76cm).",
+          "Nếu số đo nằm giữa hai size, nên chọn size lớn hơn để mặc thoải mái hơn.",
+          "Số đo trải phẳng, đơn vị cm, mang tính tham khảo và có thể chênh lệch 1–2 cm tùy từng lô sản xuất.",
         ],
       },
     ],
@@ -68,8 +67,8 @@ sections: [
         heading: "Vận chuyển nội địa",
         paragraphs: ["Đơn hàng được xử lý trong vòng 24 giờ làm việc kể từ khi xác nhận thanh toán."],
         list: [
-          "Nội thành Hà Nội: 1–2 ngày làm việc.",
-          "Các tỉnh thành khác: 2–4 ngày làm việc.",
+          `Nội thành Hà Nội: 1–2 ngày làm việc, phí vận chuyển đồng giá ${formatPrice({ amount: company.shippingFeeHanoi, currencyCode: "VND" })}.`,
+          `Các tỉnh thành khác: 2–4 ngày làm việc, phí vận chuyển ${formatPrice({ amount: company.shippingFeeOtherProvinces, currencyCode: "VND" })}.`,
           freeShippingLine,
         ],
       },
@@ -158,9 +157,8 @@ export const staticPagesEn: StaticPage[] = [
       {
         heading: "If you're between two sizes",
         paragraphs: [
-          "For Regular or Slim fit tops: size up if you prefer a roomier fit.",
-          "For Oversized fit tops: the piece is already cut roomy, so you can usually stick with your regular chest measurement.",
-          "For denim: the size number is the waist measurement in inches (e.g. size 30 = ~76cm waist).",
+          "If your measurements fall between two sizes, choose the larger size for a more comfortable fit.",
+          "Measurements are flat, in cm, for reference only and may vary by 1–2 cm between production batches.",
         ],
       },
     ],
@@ -173,7 +171,11 @@ export const staticPagesEn: StaticPage[] = [
       {
         heading: "Domestic shipping",
         paragraphs: ["Orders are processed within 24 business hours of payment confirmation."],
-        list: ["Inner Hanoi: 1–2 business days.", "Other provinces: 2–4 business days.", freeShippingLineEn],
+        list: [
+          `Inner Hanoi: 1–2 business days, flat shipping fee of ${formatPrice({ amount: company.shippingFeeHanoi, currencyCode: "VND" })}.`,
+          `Other provinces: 2–4 business days, shipping fee of ${formatPrice({ amount: company.shippingFeeOtherProvinces, currencyCode: "VND" })}.`,
+          freeShippingLineEn,
+        ],
       },
       {
         heading: "International shipping",

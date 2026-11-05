@@ -34,6 +34,37 @@ function makeVariants(
   }));
 }
 
+// Bảng size chính thức của nhóm (số đo trải phẳng, cm) — size 1/2/3 cho cả 4 loại áo.
+const HEIGHT_WEIGHT = [
+  { size: "1", height: "160 – 168", weight: "50 – 58" },
+  { size: "2", height: "168 – 174", weight: "58 – 68" },
+  { size: "3", height: "174 – 182", weight: "68 – 78" },
+];
+
+const TEE_SIZE_CHART: SizeChartRow[] = [
+  { ...HEIGHT_WEIGHT[0], length: "68", width: "52", shoulder: "46", sleeve: "21" },
+  { ...HEIGHT_WEIGHT[1], length: "71", width: "55", shoulder: "48.5", sleeve: "22" },
+  { ...HEIGHT_WEIGHT[2], length: "74", width: "58", shoulder: "51", sleeve: "23" },
+];
+
+const LONG_SLEEVE_SIZE_CHART: SizeChartRow[] = [
+  { ...HEIGHT_WEIGHT[0], length: "68", width: "53", shoulder: "47", sleeve: "59" },
+  { ...HEIGHT_WEIGHT[1], length: "71", width: "56", shoulder: "49.5", sleeve: "61" },
+  { ...HEIGHT_WEIGHT[2], length: "74", width: "59", shoulder: "52", sleeve: "63" },
+];
+
+const BOMBER_SIZE_CHART: SizeChartRow[] = [
+  { ...HEIGHT_WEIGHT[0], length: "65", width: "57", shoulder: "49", sleeve: "61" },
+  { ...HEIGHT_WEIGHT[1], length: "68", width: "60", shoulder: "51.5", sleeve: "63" },
+  { ...HEIGHT_WEIGHT[2], length: "71", width: "63", shoulder: "54", sleeve: "65" },
+];
+
+const HOODIE_ZIP_SIZE_CHART: SizeChartRow[] = [
+  { ...HEIGHT_WEIGHT[0], length: "66", width: "57", shoulder: "50", sleeve: "61" },
+  { ...HEIGHT_WEIGHT[1], length: "69", width: "60", shoulder: "52.5", sleeve: "63" },
+  { ...HEIGHT_WEIGHT[2], length: "72", width: "63", shoulder: "55", sleeve: "65" },
+];
+
 export type RawProduct = {
   code: string;
   /** Tên sản phẩm đầy đủ, dùng nguyên văn làm title — không qua khuôn "25OC | <MÃ> <LOẠI>". */
@@ -93,7 +124,7 @@ export const SEED_PRODUCTS: RawProduct[] = [
     labels: ["FRONT", "BACK"],
     sizes: ["1", "2", "3"],
     unavailableSizes: [],
-    sizeChart: [], // chưa có số đo thật
+    sizeChart: TEE_SIZE_CHART,
     material: "Cotton 220gsm",
     materialEn: "220gsm cotton",
     care: "Giặt máy nước lạnh, lộn trái trước khi giặt",
@@ -123,6 +154,86 @@ export const SEED_PRODUCTS: RawProduct[] = [
     ],
   },
   {
+    code: "RSG",
+    title: 'READY SET "READY, SET, GO." SHORT SLEEVE TEE',
+    handle: "ready-set-go-short-sleeve-tee",
+    category: "Tops",
+    tags: ["cotton", "tee", "short-sleeve"],
+    price: 499000,
+    tones: ["ink", "ink"],
+    labels: ["FRONT", "BACK"],
+    sizes: ["1", "2", "3"],
+    unavailableSizes: [],
+    sizeChart: TEE_SIZE_CHART,
+    material: "Cotton 220gsm",
+    materialEn: "220gsm cotton",
+    care: "Giặt máy nước lạnh, lộn trái trước khi giặt",
+    careEn: "Machine wash cold, inside out",
+    fit: "Oversized",
+    modelInfo: "",
+    modelInfoEn: "",
+    collections: ["all", "tops", "new"],
+    createdAt: "2026-11-06",
+    descriptionVi:
+      "Áo thun đen tay ngắn, form oversized, in dòng chữ \"READY, SET, GO.\" ở ngực và một dòng nhỏ ở sau cổ.",
+    descriptionEn:
+      "Black short-sleeve tee in an oversized fit, with a \"READY, SET, GO.\" print on the chest and a small print at the back of the neck.",
+    details: [
+      "Màu: Đen (Black)",
+      "Form: Oversized",
+      "Dòng chữ \"READY, SET, GO.\" in ở ngực",
+      "Dòng chữ nhỏ in ở sau cổ",
+      "Nhãn READY SET ở cổ áo",
+    ],
+    detailsEn: [
+      "Color: Black",
+      "Fit: Oversized",
+      "\"READY, SET, GO.\" printed on the chest",
+      "Small print at the back of the neck",
+      "READY SET neck label",
+    ],
+  },
+  {
+    code: "RSP",
+    title: "READY SET PEACE SHORT SLEEVE TEE",
+    handle: "ready-set-peace-short-sleeve-tee",
+    category: "Tops",
+    tags: ["cotton", "tee", "short-sleeve", "distressed"],
+    price: 499000,
+    tones: ["sand", "sand"],
+    labels: ["FRONT", "BACK"],
+    sizes: ["1", "2", "3"],
+    unavailableSizes: [],
+    sizeChart: TEE_SIZE_CHART,
+    material: "Cotton 220gsm",
+    materialEn: "220gsm cotton",
+    care: "Giặt máy nước lạnh, lộn trái trước khi giặt",
+    careEn: "Machine wash cold, inside out",
+    fit: "Oversized",
+    modelInfo: "",
+    modelInfoEn: "",
+    collections: ["all", "tops", "new"],
+    createdAt: "2026-11-06",
+    descriptionVi:
+      "Áo thun tay ngắn màu xám nhạt bạc màu, form oversized, in biểu tượng hòa bình hiệu ứng nứt ở ngực, cổ và gấu xử lý rách nhẹ.",
+    descriptionEn:
+      "Washed light-grey short-sleeve tee in an oversized fit, with a cracked-effect peace sign on the chest and lightly distressed collar and hem.",
+    details: [
+      "Màu: Xám nhạt bạc màu (Washed light grey)",
+      "Form: Oversized",
+      "Biểu tượng hòa bình in hiệu ứng nứt ở ngực",
+      "Cổ áo, gấu và tay xử lý rách nhẹ",
+      "Nhãn READY SET ở cổ áo",
+    ],
+    detailsEn: [
+      "Color: Washed light grey",
+      "Fit: Oversized",
+      "Cracked-effect peace sign print on the chest",
+      "Lightly distressed collar, hem and sleeves",
+      "READY SET neck label",
+    ],
+  },
+  {
     code: "RSL",
     title: "READY SET RS CIRCLE LONG SLEEVE TEE",
     handle: "ready-set-rs-circle-long-sleeve-tee",
@@ -133,7 +244,7 @@ export const SEED_PRODUCTS: RawProduct[] = [
     labels: ["FRONT", "BACK"],
     sizes: ["1", "2", "3"],
     unavailableSizes: [],
-    sizeChart: [], // chưa có số đo thật
+    sizeChart: LONG_SLEEVE_SIZE_CHART,
     material: "Cotton 220gsm",
     materialEn: "220gsm cotton",
     care: "Giặt máy nước lạnh, lộn trái trước khi giặt",
@@ -175,7 +286,7 @@ export const SEED_PRODUCTS: RawProduct[] = [
     labels: ["FRONT", "BACK"],
     sizes: ["1", "2", "3"],
     unavailableSizes: [],
-    sizeChart: [], // chưa có số đo thật
+    sizeChart: HOODIE_ZIP_SIZE_CHART,
     material: "Đang cập nhật", // TẠM: chưa có thông tin chất liệu thật của áo hoodie
     materialEn: "To be updated",
     care: "Đang cập nhật",
@@ -219,7 +330,7 @@ export const SEED_PRODUCTS: RawProduct[] = [
     labels: ["FRONT", "BACK"],
     sizes: ["1", "2", "3"],
     unavailableSizes: [],
-    sizeChart: [], // chưa có số đo thật
+    sizeChart: BOMBER_SIZE_CHART,
     material: "Đang cập nhật", // TẠM: chưa có thông tin chất liệu thật của áo khoác
     materialEn: "To be updated",
     care: "Đang cập nhật",

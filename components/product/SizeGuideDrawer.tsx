@@ -14,6 +14,8 @@ type Props = {
 export function SizeGuideDrawer({ isOpen, onClose, sizeChart, modelInfo }: Props) {
   const { dict: t } = useLocale();
   const columnLabels: Record<keyof Omit<SizeChartRow, "size">, string> = {
+    height: t.product.columnHeight,
+    weight: t.product.columnWeight,
     chest: t.product.columnChest,
     waist: t.product.columnWaist,
     hip: t.product.columnHip,
@@ -21,6 +23,8 @@ export function SizeGuideDrawer({ isOpen, onClose, sizeChart, modelInfo }: Props
     thigh: t.product.columnThigh,
     legOpening: t.product.columnLegOpening,
     width: t.product.columnWidth,
+    shoulder: t.product.columnShoulder,
+    sleeve: t.product.columnSleeve,
   };
   const columns = (Object.keys(columnLabels) as (keyof typeof columnLabels)[]).filter((key) =>
     sizeChart.some((row) => row[key]),
@@ -31,7 +35,7 @@ export function SizeGuideDrawer({ isOpen, onClose, sizeChart, modelInfo }: Props
       <div className="p-5">
         {sizeChart.length > 0 ? (
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[420px] border-collapse text-left text-[13px]">
+            <table className="w-full min-w-[560px] border-collapse text-left text-[13px]">
               <thead>
                 <tr className="border-b border-line">
                   <th className="py-2 pr-4 font-medium uppercase tracking-wider">{t.product.sizeChartHeading}</th>
