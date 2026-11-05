@@ -34,19 +34,6 @@ function makeVariants(
   }));
 }
 
-// Số đo thật, đo trên sản phẩm (bảng size chính thức của Faded Grey Tee — chỉ có M/L).
-const FADED_GREY_TEE_SIZE_CHART: SizeChartRow[] = [
-  { size: "M", length: "77 cm", width: "61 cm" },
-  { size: "L", length: "82 cm", width: "64 cm" },
-];
-
-// Số đo thật, đo trên sản phẩm (bảng size chính thức của Midnight Bootcut — chỉ bán size 1/2).
-const MIDNIGHT_SIZE_CHART: SizeChartRow[] = [
-  { size: "0", waist: "78 cm", length: "104 cm", thigh: "32 cm", legOpening: "27 cm" },
-  { size: "1", waist: "82 cm", length: "106 cm", thigh: "33 cm", legOpening: "28 cm" },
-  { size: "2", waist: "88 cm", length: "110 cm", thigh: "34 cm", legOpening: "29 cm" },
-];
-
 export type RawProduct = {
   code: string;
   /** Tên sản phẩm đầy đủ, dùng nguyên văn làm title — không qua khuôn "25OC | <MÃ> <LOẠI>". */
@@ -96,47 +83,43 @@ export type RawProduct = {
 // không cần sửa gì khác.
 export const SEED_PRODUCTS: RawProduct[] = [
   {
-    code: "MBC",
-    title: "MIDNIGHT BOOTCUT RAW DENIM PANT",
-    handle: "midnight-bootcut-raw-denim-pant",
-    category: "Bottoms",
-    tags: ["denim", "raw", "bootcut"],
-    price: 790000,
-    tones: ["charcoal", "ink", "charcoal", "stone"],
-    labels: ["FRONT", "ON MODEL", "BACK", "DETAIL"],
-    sizes: ["0","1", "2"],
-    unavailableSizes: [], // ví dụ: ["1"] nếu hết size 1
-    sizeChart: MIDNIGHT_SIZE_CHART,
-    material: "Vải raw denim đen, bề mặt mộc, đứng form",
-    materialEn: "Black raw denim, unwashed finish, stiff hand-feel",
-    care:
-      "Hạn chế giặt trong 3–6 tháng đầu để lên form và bạc màu tự nhiên Không giặt máy, không dùng chất tẩy mạnh. " +
-      "Vì sản phẩm được làm từ vải raw denim chưa qua xử lý, nên cách bảo quản sẽ khác một chút so với vải denim thông thường. Để hạn chế tình trạng vải bị co rút hoặc bạc màu, mỗi đơn hàng shop đều gửi kèm một tờ CARE TAG hướng dẫn cách giặt và bảo quản quần. Bạn đọc và lưu ý giúp shop nhé ạ.",
-    careEn:
-      "Avoid washing for the first 3–6 months to let the denim break in and fade naturally. No machine wash, no harsh detergents. " +
-      "Because this piece is made from untreated raw denim, care is a little different from regular denim. To help prevent shrinking or uneven fading, every order ships with a CARE TAG with washing and care instructions — please read and keep it handy.",
-    fit: "Regular", // dáng bootcut/loe nhẹ gấu — xem chi tiết trong "details" bên dưới, trường này chỉ nhận Slim/Regular/Oversized
-    modelInfo: "Model cao 1m65, nặng 47kg, mặc size 0",
-    modelInfoEn: "Model is 165cm / 47kg, wearing size 0",
-    collections: ["all", "bottoms", "new"],
-    createdAt: "2026-08-28",
+    code: "RSD",
+    title: "READY SET MIDNIGHT DREAM TEE",
+    handle: "ready-set-midnight-dream-tee",
+    category: "Tops",
+    tags: ["cotton", "tee", "script"],
+    price: 499000,
+    tones: ["ink", "ink"],
+    labels: ["FRONT", "BACK"],
+    sizes: ["1", "2", "3"],
+    unavailableSizes: [],
+    sizeChart: [], // chưa có số đo thật
+    material: "Cotton 220gsm",
+    materialEn: "220gsm cotton",
+    care: "Giặt máy nước lạnh, lộn trái trước khi giặt",
+    careEn: "Machine wash cold, inside out",
+    fit: "Oversized",
+    modelInfo: "",
+    modelInfoEn: "",
+    collections: ["all", "tops", "new"],
+    createdAt: "2026-11-05",
+    descriptionVi:
+      "Áo thun đen tay ngắn, form oversized, in dòng chữ viết tay \"Ready Set Midnight Dream\" ở ngực.",
+    descriptionEn:
+      "Black short-sleeve tee in an oversized fit, with a handwritten-style \"Ready Set Midnight Dream\" print on the chest.",
     details: [
-      "Màu: Black",
-      "Form: Bootcut fit",
-      "Thiết kế bootcut – loe nhẹ gấu, dễ phối đồ",
-      "Đai tăng chỉnh eo kim loại phía sau",
-      "YKK zipper",
-      "Cúc kim loại donut",
-      "Signature baby blue tab",
+      "Màu: Đen (Black)",
+      "Form: Oversized",
+      "Chữ \"Ready Set Midnight Dream\" in kiểu viết tay ở ngực",
+      "Mặt lưng trơn",
+      "Nhãn READY SET ở cổ áo",
     ],
     detailsEn: [
       "Color: Black",
-      "Fit: Bootcut",
-      "Bootcut silhouette with a slight flare at the hem, easy to style",
-      "Metal waist adjuster tabs on the back",
-      "YKK zipper",
-      "Donut metal button",
-      "Signature baby blue tab",
+      "Fit: Oversized",
+      "Handwritten-style \"Ready Set Midnight Dream\" print on the chest",
+      "Plain back",
+      "READY SET neck label",
     ],
   },
   {
@@ -182,68 +165,89 @@ export const SEED_PRODUCTS: RawProduct[] = [
     ],
   },
   {
-    code: "FGT",
-    title: "FADED GREY OVERSIZED T-SHIRT",
-    handle: "faded-grey-oversized-t-shirt",
+    code: "RSH",
+    title: "READY SET RS CIRCLE ZIP HOODIE",
+    handle: "ready-set-rs-circle-zip-hoodie",
     category: "Tops",
-    tags: ["cotton", "tee"],
-    price: 460000,
-    tones: ["sand", "ink", "sand"],
-    labels: ["FRONT", "ON MODEL", "DETAIL"],
-    sizes: ["M", "L"],
-    unavailableSizes: [], // ví dụ: ["M"] nếu hết size M
-    sizeChart: FADED_GREY_TEE_SIZE_CHART,
-    material: "Cotton 220gsm",
-    materialEn: "220gsm cotton",
-    care: "Giặt máy nước lạnh, lộn trái trước khi giặt",
-    careEn: "Machine wash cold, inside out",
-    fit: "Regular",
-    // Chưa có số đo model thật — để trống thì giao diện tự ẩn dòng này (SizeGuideDrawer).
+    tags: ["hoodie", "zip", "distressed"],
+    price: 649000, // TẠM: chưa có giá thật — sửa lại khi chốt giá
+    tones: ["ink", "ink"],
+    labels: ["FRONT", "BACK"],
+    sizes: ["1", "2", "3"],
+    unavailableSizes: [],
+    sizeChart: [], // chưa có số đo thật
+    material: "Đang cập nhật", // TẠM: chưa có thông tin chất liệu thật của áo hoodie
+    materialEn: "To be updated",
+    care: "Đang cập nhật",
+    careEn: "To be updated",
+    fit: "Oversized",
     modelInfo: "",
     modelInfoEn: "",
     collections: ["all", "tops", "new"],
-    createdAt: "2026-08-25",
+    createdAt: "2026-11-05",
+    descriptionVi:
+      "Áo hoodie khóa kéo màu đen bạc màu, form oversized, in logo RS bạc màu ở ngực, viền áo xử lý rách nhẹ.",
+    descriptionEn:
+      "Zip hoodie in washed black with an oversized fit, a distressed RS circle logo on the chest and lightly frayed edges.",
     details: [
-      "Màu: Xám (Grey)",
+      "Màu: Đen bạc màu (Washed black)",
       "Form: Oversized",
-      "Chất liệu đã xử lý, hạn chế co rút",
-      "Hình in hiệu ứng faded & cracked",
+      "Khóa kéo hai chiều ở giữa, có mũ và dây rút",
+      "Logo RS trong vòng tròn in hiệu ứng bạc màu ở ngực",
+      "Hai túi xẻ bên hông",
+      "Bo gấu và cổ tay, viền mũ và gấu xử lý rách nhẹ",
+      "Nhãn READY SET ở cổ áo",
     ],
     detailsEn: [
-      "Color: Grey",
+      "Color: Washed black",
       "Fit: Oversized",
-      "Pre-treated fabric, resists shrinking",
-      "Faded & cracked print effect",
+      "Two-way center zip, hood with drawstrings",
+      "Distressed RS circle logo print on the chest",
+      "Two slanted side pockets",
+      "Ribbed hem and cuffs, lightly frayed hood and hem edges",
+      "READY SET neck label",
     ],
   },
   {
-    code: "OLF",
-    title: '"OLF" SHADOW FLIP BEANIE',
-    handle: "olf-shadow-flip-beanie",
-    category: "Accessories",
-    tags: ["beanie", "accessory", "knit"],
-    price: 360000,
-    tones: ["ink", "stone", "ink"],
-    labels: ["FRONT", "ON MODEL", "DETAIL"],
-    sizes: SIZE_SETS.onesize,
-    unavailableSizes: [], // freesize nên chỉ có 1 size — hết hàng thì dùng "soldOut: true" ở dưới thay vì mục này
-    sizeChart: [],
-    material: "Len dệt mềm",
-    materialEn: "Soft knit wool",
-    care: "Giặt tay nước lạnh, phơi khô tự nhiên",
-    careEn: "Hand wash cold, dry flat",
-    fit: "Regular",
-    modelInfo: "Freesize, phù hợp với đa số vòng đầu.",
-    modelInfoEn: "One-size, fits most head sizes.",
-    collections: ["all", "accessories", "new"],
-    createdAt: "2026-09-04",
+    code: "RSJ",
+    title: "READY SET TRACK JACKET",
+    handle: "ready-set-track-jacket",
+    category: "Outerwear",
+    tags: ["jacket", "track", "outerwear"],
+    price: 649000,
+    tones: ["ink", "ink"],
+    labels: ["FRONT", "BACK"],
+    sizes: ["1", "2", "3"],
+    unavailableSizes: [],
+    sizeChart: [], // chưa có số đo thật
+    material: "Đang cập nhật", // TẠM: chưa có thông tin chất liệu thật của áo khoác
+    materialEn: "To be updated",
+    care: "Đang cập nhật",
+    careEn: "To be updated",
+    fit: "Oversized",
+    modelInfo: "",
+    modelInfoEn: "",
+    collections: ["all", "new"],
+    createdAt: "2026-11-05",
+    descriptionVi:
+      "Áo khoác track jacket màu đen, cổ đứng, khóa kéo giữa, in dòng chữ READY, SET, GO. ở lưng.",
+    descriptionEn:
+      "Black track jacket with a stand collar and a full-length zip, with a READY, SET, GO. print across the back.",
     details: [
       "Màu: Đen (Black)",
-      "Len dệt mềm, co giãn tốt, thoáng không ngứa, logo thêu Ready Set, kim băng đính kèm, unisex.",
+      "Form: Oversized",
+      "Cổ đứng, khóa kéo hai chiều ở giữa",
+      "Hai túi xẻ bên hông",
+      "Bo chun ở gấu áo và cổ tay",
+      "Dòng chữ \"READY, SET, GO.\" in ở lưng",
     ],
     detailsEn: [
       "Color: Black",
-      "Soft knit wool, stretchy, breathable and non-itchy, embroidered Ready Set logo, pin included, unisex.",
+      "Fit: Oversized",
+      "Stand collar with a two-way center zip",
+      "Two slanted side pockets",
+      "Elasticated hem and cuffs",
+      "\"READY, SET, GO.\" printed on the back",
     ],
   },
 ];
