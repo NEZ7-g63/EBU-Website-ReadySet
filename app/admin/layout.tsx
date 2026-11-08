@@ -18,6 +18,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <Link href="/admin/orders" className="hover:underline">
             Đơn hàng
           </Link>
+          <Link href="/admin/test-orders" className="hover:underline">
+            Đơn thử
+          </Link>
           <Link href="/admin/products" className="hover:underline">
             Sản phẩm
           </Link>

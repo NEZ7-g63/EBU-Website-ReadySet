@@ -33,12 +33,6 @@ type OrderSummary = {
 
 type Step = { name: "form" } | ({ name: "done"; orderId: string; testerCode: string } & OrderSummary);
 
-function makeOrderId(): string {
-  // Ghép timestamp (base36) + 3 ký tự ngẫu nhiên để 2 đơn thử liên tiếp không trùng mã.
-  const ts = Date.now().toString(36).toUpperCase();
-  const rand = Math.random().toString(36).slice(2, 5).toUpperCase();
-  return `TEST-${ts}${rand}`;
-}
 
 const EMPTY_CUSTOMER = { testerCode: "", city: "", district: "", ward: "", note: "" };
 
@@ -67,6 +61,8 @@ export default function CheckoutPage() {
   const [provinceCode, setProvinceCode] = useState<number | null>(null);
   const [districtCode, setDistrictCode] = useState<number | null>(null);
   const [draftHydrated, setDraftHydrated] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
   const districts = useMemo(() => getDistrictsByProvinceCode(provinceCode), [provinceCode]);
   const wards = useMemo(() => getWardsByDistrictCode(provinceCode, districtCode), [provinceCode, districtCode]);
 
@@ -131,21 +127,54 @@ export default function CheckoutPage() {
     updateField("ward", ward?.name ?? "");
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (submitting) return;
+    setSubmitting(true);
+    setSubmitError(false);
+
+    // Gửi đơn lên server để nhận mã đơn dạng RS0xxxx (giá và phí ship do server tự tính lại)
+    // — khách dùng mã này tra tiến trình đơn ở mục "Kiểm tra đơn hàng".
+    let serverOrder: { orderId: string; shippingFee: number; total: number } | null = null;
+    try {
+      const res = await fetch("/api/test-orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          lines: lines.map((l) => ({ productHandle: l.productHandle, variantId: l.variantId, quantity: l.quantity })),
+          testerCode: customer.testerCode,
+          city: customer.city,
+          district: customer.district,
+          ward: customer.ward,
+          note: customer.note,
+          paymentLabel,
+        }),
+      });
+      const data = await res.json();
+      if (res.ok && data.ok) serverOrder = data;
+    } catch {
+      // lỗi mạng — xử lý ngay bên dưới như đặt hàng thất bại
+    }
+    if (!serverOrder) {
+      setSubmitting(false);
+      setSubmitError(true);
+      return;
+    }
+
     haptic("success");
     // Chụp lại giỏ hàng trước khi clearCart() xoá sạch — bước xác nhận cần hiện lại
-    // đúng những gì vừa đặt. Không gửi gì lên server: đây chỉ là đơn thử nghiệm.
+    // đúng những gì vừa đặt.
     setStep({
       name: "done",
-      orderId: makeOrderId(),
+      orderId: serverOrder.orderId,
       testerCode: customer.testerCode.trim(),
       lines,
       subtotal: subtotalAmount,
-      shippingFee,
-      total,
+      shippingFee: serverOrder.shippingFee,
+      total: serverOrder.total,
       paymentLabel,
     });
+    setSubmitting(false);
     clearCart();
     try {
       window.sessionStorage.removeItem(DRAFT_STORAGE_KEY);
@@ -163,6 +192,7 @@ export default function CheckoutPage() {
             {t.checkout.orderCode} <strong className="text-ink">#{step.orderId}</strong>
             {step.testerCode ? <> · Tester: <strong className="text-ink">{step.testerCode}</strong></> : null}
           </p>
+          <p className="mx-auto mt-3 max-w-xl text-[14px]">{t.checkout.orderConfirmNote}</p>
         </div>
 
         <div className="mx-auto mt-8 max-w-xl">
@@ -214,9 +244,14 @@ export default function CheckoutPage() {
               </div>
             </div>
 
-            <LinkButton href="/collections/all" className="self-start">
-              {t.common.continueShopping}
-            </LinkButton>
+            <div className="flex flex-wrap gap-3">
+              <LinkButton href={`/track-order?code=${step.orderId}`} className="self-start">
+                {t.checkout.trackThisOrder}
+              </LinkButton>
+              <LinkButton href="/collections/all" variant="ghost" className="self-start">
+                {t.common.continueShopping}
+              </LinkButton>
+            </div>
           </div>
         </div>
       </div>
@@ -360,8 +395,13 @@ export default function CheckoutPage() {
             </div>
           </div>
 
-          <Button type="submit" fullWidth className="mt-6">
-            {t.checkout.placeOrder}
+          {submitError ? (
+            <p role="alert" className="mt-4 text-[13px] text-red-600">
+              {t.checkout.orderSubmitError}
+            </p>
+          ) : null}
+          <Button type="submit" fullWidth className="mt-6" disabled={submitting}>
+            {submitting ? t.checkout.placingOrder : t.checkout.placeOrder}
           </Button>
         </div>
       </form>

@@ -40,6 +40,7 @@ export function NavOverlay({
   const [lookbookOpen, setLookbookOpen] = useState(false);
   const otherLinks = [
     { label: t.nav.about, href: "/pages/about" },
+    { label: t.nav.trackOrder, href: "/track-order" },
     { label: t.nav.contact, href: "/pages/contact" },
     { label: t.nav.shippingReturns, href: "/pages/shipping-returns" },
   ];

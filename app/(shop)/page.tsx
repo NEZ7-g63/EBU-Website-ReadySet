@@ -1,8 +1,6 @@
 import { Hero } from "@/components/home/Hero";
 import { NewArrivals } from "@/components/home/NewArrivals";
-import { CampaignSection, Campaign2Section, Campaign3Section } from "@/components/home/CampaignSection";
-import { CategoryTiles } from "@/components/home/CategoryTiles";
-import { InstagramStrip } from "@/components/home/InstagramStrip";
+import { LogoMarquee } from "@/components/home/LogoMarquee";
 
 // Canonical cho trang chủ — tránh Google coi "/" và "/?utm_..." là 2 trang trùng nhau. Đặt ở
 // đây, không ở layout gốc: đặt ở layout thì mọi trang con thừa hưởng canonical "/".
@@ -22,11 +20,7 @@ export default function HomePage() {
     <>
       <Hero />
       <NewArrivals />
-      <CampaignSection />
-      <Campaign2Section />
-      <Campaign3Section />
-      <CategoryTiles />
-      <InstagramStrip />
+      <LogoMarquee />
     </>
   );
 }

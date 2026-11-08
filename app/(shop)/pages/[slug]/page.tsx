@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getStaticPage, staticPages } from "@/lib/data/pages";
 import { company } from "@/lib/data/company";
 import { ContactForm } from "@/components/forms/ContactForm";
+import { FacebookIcon } from "@/components/ui/FacebookIcon";
 import { getT, getLocale } from "@/lib/i18n/locale";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -46,6 +47,23 @@ export default async function StaticPageRoute({ params }: Props) {
                   </a>
                 </dd>
               </div>
+              {company.facebook ? (
+                <div>
+                  <dt className="text-ink-60">{t.contact.facebookHeading}</dt>
+                  <dd>
+                    <a
+                      href={company.facebook.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 underline underline-offset-2"
+                    >
+                      <FacebookIcon className="h-5 w-5" />
+                      {company.facebook.label}
+                    </a>
+                    <p className="mt-2 text-[13px] text-ink-60">{t.contact.facebookNote}</p>
+                  </dd>
+                </div>
+              ) : null}
               {company.instagram ? (
                 <div>
                   <dt className="text-ink-60">{t.contact.socialMedia}</dt>

@@ -30,12 +30,14 @@ export function Footer() {
   ];
   const supportLinks = [
     { label: t.nav.sizeGuide, href: "/pages/size-guide" },
+    { label: t.nav.trackOrder, href: "/track-order" },
     { label: t.nav.shippingReturns, href: "/pages/shipping-returns" },
     { label: t.nav.contact, href: "/pages/contact" },
     { label: t.nav.privacy, href: "/pages/privacy" },
   ];
   const aboutLinks = [
     { label: t.nav.lookbook, href: "/campaign" },
+    ...(company.facebook ? [{ label: "Facebook", href: company.facebook.url }] : []),
     ...(company.instagram ? [{ label: t.nav.instagram, href: company.instagram.url }] : []),
   ];
 
