@@ -11,7 +11,7 @@ export const company = {
   /** Fanpage Facebook của shop — hiện ở trang Liên hệ, trang Kiểm tra đơn hàng và chân trang. Để null thì mọi chỗ tự ẩn. */
   facebook: {
     label: "Ready Set",
-    url: "https://www.facebook.com/profile.php?id=61595885171970&locale=vi_VN",
+    url: "https://www.facebook.com/profile.php?id=61595885171970",
   } as { label: string; url: string } | null,
   freeShippingThreshold: 1000000,
   /**
