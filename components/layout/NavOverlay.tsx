@@ -43,6 +43,7 @@ export function NavOverlay({
     { label: t.nav.trackOrder, href: "/track-order" },
     { label: t.nav.contact, href: "/pages/contact" },
     { label: t.nav.shippingReturns, href: "/pages/shipping-returns" },
+    { label: "Admin", href: "/admin/test-orders" },
   ];
   const links = otherLinks;
   const shopLinkLabel = (handle: string, fallback: string) => (handle === "all" ? t.nav.allProducts : fallback);

@@ -8,12 +8,11 @@ export const company = {
    * { label: "@ten.tai.khoan", url: "https://instagram.com/ten.tai.khoan" }.
    */
   instagram: null as { label: string; url: string } | null,
-  /**
-   * Fanpage Facebook của shop — hiện ở trang Liên hệ, trang Kiểm tra đơn hàng và chân trang.
-   * TẠM: đang trỏ về trang chủ Facebook vì nhóm chưa có link fanpage thật — thay "url" bằng
-   * link fanpage (dạng https://www.facebook.com/ten.fanpage). Để null thì mọi chỗ tự ẩn.
-   */
-  facebook: { label: "Ready Set", url: "https://www.facebook.com/" } as { label: string; url: string } | null,
+  /** Fanpage Facebook của shop — hiện ở trang Liên hệ, trang Kiểm tra đơn hàng và chân trang. Để null thì mọi chỗ tự ẩn. */
+  facebook: {
+    label: "Ready Set",
+    url: "https://www.facebook.com/profile.php?id=61595885171970&locale=vi_VN",
+  } as { label: string; url: string } | null,
   freeShippingThreshold: 1000000,
   /**
    * Phí vận chuyển khi đơn CHƯA đạt mốc miễn phí ở trên — tách riêng nội thành Hà Nội
