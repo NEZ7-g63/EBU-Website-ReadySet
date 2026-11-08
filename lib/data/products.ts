@@ -281,7 +281,7 @@ export const SEED_PRODUCTS: RawProduct[] = [
     handle: "ready-set-rs-circle-zip-hoodie",
     category: "Tops",
     tags: ["hoodie", "zip", "distressed"],
-    price: 649000, // TẠM: chưa có giá thật — sửa lại khi chốt giá
+    price: 399000,
     tones: ["ink", "ink"],
     labels: ["FRONT", "BACK"],
     sizes: ["1", "2", "3"],
