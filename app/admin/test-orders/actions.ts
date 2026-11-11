@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { setTestOrderStatus, type TestOrderStatus } from "@/lib/data/testOrders";
 
-const VALID: TestOrderStatus[] = ["placed", "confirmed", "delivered"];
+const VALID: TestOrderStatus[] = ["placed", "confirmed", "shipping", "delivered"];
 
 /** Đổi trạng thái 1 đơn thử — chỉ gọi được từ trang /admin/test-orders (đã bảo vệ bằng đăng nhập admin ở proxy.ts). */
 export async function updateTestOrderStatus(formData: FormData): Promise<void> {

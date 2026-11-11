@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: t.track.title, robots: { index: false, follow: false } };
 }
 
-const STEPS: TestOrderStatus[] = ["placed", "confirmed", "delivered"];
+const STEPS: TestOrderStatus[] = ["placed", "confirmed", "shipping", "delivered"];
 
 export default async function TrackOrderPage({ searchParams }: Props) {
   const t = await getT();
@@ -26,6 +26,7 @@ export default async function TrackOrderPage({ searchParams }: Props) {
   const labels: Record<TestOrderStatus, string> = {
     placed: t.track.stepPlaced,
     confirmed: t.track.stepConfirmed,
+    shipping: t.track.stepShipping,
     delivered: t.track.stepDelivered,
   };
 

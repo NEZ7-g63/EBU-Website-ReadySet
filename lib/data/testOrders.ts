@@ -12,7 +12,7 @@ import type { Money } from "@/lib/types";
  * nên đơn cũ có thể mất — muốn lưu bền cần chuyển sang cơ sở dữ liệu (Supabase).
  */
 
-export type TestOrderStatus = "placed" | "confirmed" | "delivered";
+export type TestOrderStatus = "placed" | "confirmed" | "shipping" | "delivered";
 
 export type TestOrderLine = {
   title: string;

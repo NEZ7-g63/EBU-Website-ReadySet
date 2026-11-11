@@ -7,11 +7,13 @@ export const dynamic = "force-dynamic";
 const STATUS_LABEL: Record<TestOrderStatus, string> = {
   placed: "Đã đặt hàng",
   confirmed: "Đã xác nhận",
+  shipping: "Shipping",
   delivered: "Đã giao hàng",
 };
 const NEXT: Record<TestOrderStatus, { status: TestOrderStatus; label: string } | null> = {
   placed: { status: "confirmed", label: "Xác nhận đơn" },
-  confirmed: { status: "delivered", label: "Đã giao hàng" },
+  confirmed: { status: "shipping", label: "Bắt đầu giao hàng" },
+  shipping: { status: "delivered", label: "Đã giao hàng" },
   delivered: null,
 };
 
