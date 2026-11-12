@@ -42,7 +42,7 @@ export function NavOverlay({
     { label: t.nav.about, href: "/pages/about" },
     { label: t.nav.trackOrder, href: "/track-order" },
     { label: t.nav.contact, href: "/pages/contact" },
-    { label: t.nav.shippingReturns, href: "/pages/shipping-returns" },
+    { label: t.nav.policies, href: "/pages/policies" },
     { label: "Admin", href: "/admin/test-orders" },
   ];
   const links = otherLinks;

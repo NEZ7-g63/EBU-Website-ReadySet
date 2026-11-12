@@ -25,6 +25,13 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      { source: "/pages/shipping-returns", destination: "/pages/policies#shipping", permanent: false },
+      { source: "/pages/return-policy", destination: "/pages/policies#returns", permanent: false },
+      { source: "/pages/privacy", destination: "/pages/policies#privacy", permanent: false },
+    ];
+  },
   experimental: {
     // Form sản phẩm ở /admin gửi kèm ảnh — mặc định server action chỉ nhận 1MB.
     serverActions: { bodySizeLimit: "50mb" },

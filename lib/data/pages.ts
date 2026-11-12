@@ -1,11 +1,21 @@
 import { company } from "@/lib/data/company";
 import { formatPrice } from "@/lib/utils/formatPrice";
 
+export type StaticSection = {
+  heading: string;
+  paragraphs: string[];
+  list?: string[];
+  /** Hiện logo Facebook (bấm vào mở fanpage) ngay sau đoạn văn cuối của mục này. */
+  facebookLink?: boolean;
+};
+
 export type StaticPage = {
   slug: string;
   title: string;
   intro?: string;
-  sections: { heading: string; paragraphs: string[]; list?: string[] }[];
+  sections: StaticSection[];
+  /** Trang dài chia thành nhiều nhóm (có mục lục ở đầu trang) — dùng cho trang "Chính sách". Có "groups" thì bỏ qua "sections". */
+  groups?: { id: string; title: string; sections: StaticSection[] }[];
 };
 
 // Dùng chung đúng 1 nguồn (company.freeShippingThreshold) cho mọi chỗ nhắc tới
@@ -14,7 +24,7 @@ export type StaticPage = {
 const freeShippingLine = `Miễn phí vận chuyển cho đơn hàng từ ${formatPrice({ amount: company.freeShippingThreshold, currencyCode: "VND" })}.`;
 const freeShippingLineEn = `Free shipping on orders over ${formatPrice({ amount: company.freeShippingThreshold, currencyCode: "VND" })}.`;
 
-export const staticPages: StaticPage[] = [
+const baseStaticPages: StaticPage[] = [
   {
   slug: "about",
 title: "Về READY SET",
@@ -73,6 +83,13 @@ sections: [
         ],
       },
       {
+        heading: "Xác nhận và theo dõi đơn hàng",
+        paragraphs: [
+          "Sau khi đặt hàng, mỗi đơn có một mã riêng dạng RS0xxxx. Bộ phận chăm sóc khách hàng sẽ liên hệ để xác nhận đơn hàng, quý khách vui lòng chụp lại mã đơn hàng.",
+          "Bạn nhập mã tại mục Kiểm tra đơn hàng để xem đơn đang ở bước nào: Đã đặt hàng, Đã xác nhận, Shipping hoặc Đã giao hàng.",
+        ],
+      },
+      {
         heading: "Vận chuyển quốc tế",
         paragraphs: [
           `Đối với các đơn hàng quốc tế vui lòng liên hệ qua email ${company.email} để được tư vấn cũng như hỗ trợ một cách chi tiết.`,
@@ -89,19 +106,71 @@ sections: [
     ],
   },
   {
+    slug: "return-policy",
+    title: "Chính sách đổi trả",
+    intro: "Đây là chính sách dự kiến khi Ready Set chính thức ra mắt. Hiện tại web là dự án sinh viên, đơn hàng chỉ là đơn thử nghiệm và chưa có thanh toán, giao hàng hay hoàn tiền thật.",
+    sections: [
+      {
+        heading: "Thời hạn và điều kiện đổi trả",
+        paragraphs: [`Ready Set chấp nhận đổi size hoặc trả hàng trong vòng ${company.returnWindowDays} ngày kể từ khi bạn nhận hàng.`],
+        list: [
+          "Sản phẩm còn nguyên tem, chưa qua sử dụng và chưa giặt.",
+          "Sản phẩm không bị dơ, có mùi lạ hoặc hư hỏng do quá trình sử dụng.",
+          "Bạn cung cấp mã đơn hàng (dạng RS0xxxx) để shop kiểm tra đơn.",
+        ],
+      },
+      {
+        heading: "Các trường hợp được hỗ trợ",
+        paragraphs: [],
+        list: [
+          "Đổi sang size khác (áp dụng khi size đó còn hàng).",
+          "Trả hàng vì không vừa ý, khi sản phẩm còn đủ điều kiện ở trên.",
+          "Sản phẩm bị lỗi từ nhà sản xuất, hoặc shop giao sai mẫu, sai size.",
+        ],
+      },
+      {
+        heading: "Cách đổi trả",
+        paragraphs: [],
+        list: [
+          "Bước 1: Liên hệ shop qua fanpage Facebook của Ready Set trong thời hạn đổi trả, gửi mã đơn hàng và ảnh chụp sản phẩm.",
+          "Bước 2: Shop xác nhận yêu cầu và hướng dẫn cách gửi hàng về.",
+          "Bước 3: Bạn gửi sản phẩm về cho shop.",
+          "Bước 4: Shop kiểm tra sản phẩm, sau đó gửi sản phẩm đổi hoặc hoàn tiền cho bạn.",
+        ],
+      },
+      {
+        heading: "Chi phí vận chuyển",
+        paragraphs: [
+          "Chi phí vận chuyển đổi trả do khách hàng chi trả, trừ trường hợp lỗi từ nhà sản xuất hoặc shop giao sai sản phẩm, khi đó shop chịu chi phí.",
+        ],
+      },
+      {
+        heading: "Hoàn tiền",
+        paragraphs: [
+          "Khi trả hàng thành công, shop hoàn tiền sản phẩm theo phương thức thanh toán ban đầu sau khi nhận và kiểm tra hàng. Phí vận chuyển ban đầu không được hoàn lại, trừ trường hợp lỗi từ shop.",
+        ],
+      },
+      {
+        heading: "Cần hỗ trợ?",
+        paragraphs: ["Nếu có vấn đề về đơn hàng hoặc đổi trả, vui lòng liên hệ qua fanpage Facebook của Ready Set (xem trang Liên hệ)."],
+      },
+    ],
+  },
+  {
     slug: "privacy",
     title: "Chính sách bảo mật",
     intro: "Ready Set là dự án sinh viên môn E-Business (Đại học Hà Nội). Trang này mô tả đúng cách web đang hoạt động.",
     sections: [
       {
         heading: "Dữ liệu chúng tôi thu thập",
-        paragraphs: ["Web không thu thập họ tên, số điện thoại, email hay địa chỉ của bạn. Không có form nào yêu cầu các thông tin này."],
+        paragraphs: ["Web không thu thập họ tên, số điện thoại, email hay địa chỉ chi tiết của bạn. Không có form nào yêu cầu các thông tin này."],
       },
       {
         heading: "Giỏ hàng và đơn thử nghiệm",
         paragraphs: [
-          "Giỏ hàng chỉ được lưu trên trình duyệt của bạn (localStorage), không gửi lên server.",
-          "Đơn thử nghiệm ở bước thanh toán không được gửi lên server và không có thanh toán hay giao hàng thật. Mã tester, khu vực và ghi chú bạn nhập chỉ nằm trên trình duyệt của bạn.",
+          "Giỏ hàng chỉ được lưu trên trình duyệt của bạn (localStorage) cho đến khi bạn đặt hàng.",
+          "Khi bạn bấm đặt hàng, web gửi lên máy chủ và lưu: mã đơn (RS0xxxx), mã tester (nếu bạn nhập), khu vực (tỉnh/thành, quận/huyện, phường/xã), ghi chú, các sản phẩm đã chọn, số tiền và trạng thái đơn. Thông tin này dùng để hiển thị ở mục Kiểm tra đơn hàng. Đây là đơn thử nghiệm, không có thanh toán hay giao hàng thật.",
+          "Ai có mã đơn hàng đều xem được thông tin đơn, nên vui lòng không chia sẻ mã đơn công khai.",
         ],
       },
       {
@@ -110,7 +179,8 @@ sections: [
       },
       {
         heading: "Liên hệ",
-        paragraphs: [`Mọi câu hỏi về dữ liệu, vui lòng gửi email tới ${company.email}.`],
+        paragraphs: [`Mọi câu hỏi về dữ liệu, vui lòng gửi email tới ${company.email} hoặc liên hệ qua Facebook của Ready Set.`],
+        facebookLink: true,
       },
     ],
   },
@@ -119,7 +189,7 @@ sections: [
 // Bản tiếng Anh song song — cùng "slug", cùng thứ tự section, dùng khi khách chọn
 // English (xem app/(shop)/pages/[slug]/page.tsx). Không tự sinh máy — dịch tay để
 // giữ đúng giọng văn thương hiệu.
-export const staticPagesEn: StaticPage[] = [
+const baseStaticPagesEn: StaticPage[] = [
   {
     slug: "about",
     title: "About READY SET",
@@ -178,6 +248,13 @@ export const staticPagesEn: StaticPage[] = [
         ],
       },
       {
+        heading: "Order confirmation and tracking",
+        paragraphs: [
+          "After you place an order, it gets its own code in the format RS0xxxx. Our customer care team will contact you to confirm your order, so please take a screenshot of your order code.",
+          "Enter the code in Track order to see which step your order is at: Order placed, Confirmed, Shipping or Delivered.",
+        ],
+      },
+      {
         heading: "International shipping",
         paragraphs: [`For international orders, please reach out via email at ${company.email} for detailed support.`],
       },
@@ -192,19 +269,71 @@ export const staticPagesEn: StaticPage[] = [
     ],
   },
   {
+    slug: "return-policy",
+    title: "Return Policy",
+    intro: "This is the planned policy for when Ready Set officially launches. For now the site is a student project: orders are test orders and there is no real payment, delivery or refund.",
+    sections: [
+      {
+        heading: "Return window and conditions",
+        paragraphs: [`Ready Set accepts size exchanges or returns within ${company.returnWindowDays} days of delivery.`],
+        list: [
+          "The item must have its tags attached, be unused and unwashed.",
+          "The item must not be dirty, smell odd or be damaged through use.",
+          "Please give us your order code (format RS0xxxx) so we can find your order.",
+        ],
+      },
+      {
+        heading: "What we can help with",
+        paragraphs: [],
+        list: [
+          "Exchange for another size (when that size is in stock).",
+          "Return an item you are not happy with, if it still meets the conditions above.",
+          "Items with a manufacturing defect, or if we sent the wrong item or size.",
+        ],
+      },
+      {
+        heading: "How to return or exchange",
+        paragraphs: [],
+        list: [
+          "Step 1: Contact us via the Ready Set Facebook fanpage within the return window and send your order code and photos of the item.",
+          "Step 2: We confirm your request and tell you how to send the item back.",
+          "Step 3: You send the item back to us.",
+          "Step 4: We check the item, then send the exchange item or refund you.",
+        ],
+      },
+      {
+        heading: "Shipping cost",
+        paragraphs: [
+          "Return shipping is paid by the customer, except for a manufacturing defect or if we sent the wrong product, in which case we cover the cost.",
+        ],
+      },
+      {
+        heading: "Refunds",
+        paragraphs: [
+          "For an accepted return, we refund the product price to the original payment method after we receive and check the item. The original shipping fee is not refunded, unless the problem was our mistake.",
+        ],
+      },
+      {
+        heading: "Need help?",
+        paragraphs: ["If you have a problem with an order or a return, please contact us via the Ready Set Facebook fanpage (see the Contact page)."],
+      },
+    ],
+  },
+  {
     slug: "privacy",
     title: "Privacy Policy",
     intro: "Ready Set is a student project for the E-Business course at Hanoi University. This page describes exactly how the site works.",
     sections: [
       {
         heading: "Data we collect",
-        paragraphs: ["The site does not collect your name, phone number, email or address. No form asks for this information."],
+        paragraphs: ["The site does not collect your name, phone number, email or detailed address. No form asks for this information."],
       },
       {
         heading: "Cart and test orders",
         paragraphs: [
-          "Your cart is stored only in your own browser (localStorage) and is never sent to a server.",
-          "Test orders placed at checkout are not sent to any server, and there is no real payment or delivery. The tester code, area and note you enter stay in your browser.",
+          "Your cart is stored only in your own browser (localStorage) until you place an order.",
+          "When you place an order, the site sends to our server and saves: the order code (RS0xxxx), the tester code (if you enter one), the area (province, district, ward), your note, the items you chose, the amounts and the order status. This is used to show your order in Track order. These are test orders: there is no real payment or delivery.",
+          "Anyone who has an order code can see that order's details, so please do not share your order code publicly.",
         ],
       },
       {
@@ -213,10 +342,43 @@ export const staticPagesEn: StaticPage[] = [
       },
       {
         heading: "Contact",
-        paragraphs: [`For any questions about data, please email ${company.email}.`],
+        paragraphs: [`For any questions about data, please email ${company.email} or contact us via the Ready Set Facebook page.`],
+        facebookLink: true,
       },
     ],
   },
+];
+
+// Trang "Chính sách" gom giao hàng + đổi trả + bảo mật vào 1 trang (mỗi nhóm có mục lục nhảy tới).
+// Nội dung lấy lại từ 3 trang gốc bên trên nên chỉ phải sửa ở 1 chỗ. Mục "Đổi trả" ngắn trong trang
+// giao hàng (mục cuối của trang đó) bị bỏ vì đã có nhóm Đổi trả đầy đủ.
+const POLICY_SLUGS = ["shipping-returns", "return-policy", "privacy"];
+
+function buildPolicies(source: StaticPage[], locale: "vi" | "en"): StaticPage {
+  const find = (slug: string) => source.find((p) => p.slug === slug)!;
+  const vi = locale === "vi";
+  return {
+    slug: "policies",
+    title: vi ? "Chính sách" : "Policies",
+    intro: vi
+      ? "Các chính sách của Ready Set: giao hàng, đổi trả và bảo mật. Đây là chính sách dự kiến khi Ready Set chính thức ra mắt. Hiện tại web là dự án sinh viên (E-Business, Hanoi University), đơn hàng chỉ là đơn thử nghiệm và chưa có thanh toán, giao hàng hay hoàn tiền thật."
+      : "Ready Set's policies: delivery, returns and privacy. These are the planned policies for when Ready Set officially launches. For now the site is a student project (E-Business, Hanoi University): orders are test orders and there is no real payment, delivery or refund.",
+    sections: [],
+    groups: [
+      { id: "shipping", title: vi ? "Giao hàng" : "Delivery", sections: find("shipping-returns").sections.slice(0, -1) },
+      { id: "returns", title: vi ? "Đổi trả" : "Returns & exchanges", sections: find("return-policy").sections },
+      { id: "privacy", title: vi ? "Bảo mật" : "Privacy", sections: find("privacy").sections },
+    ],
+  };
+}
+
+export const staticPages: StaticPage[] = [
+  ...baseStaticPages.filter((p) => !POLICY_SLUGS.includes(p.slug)),
+  buildPolicies(baseStaticPages, "vi"),
+];
+export const staticPagesEn: StaticPage[] = [
+  ...baseStaticPagesEn.filter((p) => !POLICY_SLUGS.includes(p.slug)),
+  buildPolicies(baseStaticPagesEn, "en"),
 ];
 
 export function getStaticPage(slug: string, locale: "vi" | "en" = "vi"): StaticPage | undefined {

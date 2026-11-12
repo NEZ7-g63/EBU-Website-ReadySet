@@ -148,7 +148,7 @@ export default async function ProductPage({ params, searchParams }: Props) {
                         {t.product.shippingBlurb(formatPrice({ amount: company.freeShippingThreshold, currencyCode: "VND" }))}
                       </p>
                       <p>{t.product.returnBlurb(company.returnWindowDays)}</p>
-                      <Link href="/pages/shipping-returns" className="inline-block underline underline-offset-2">
+                      <Link href="/pages/policies#shipping" className="inline-block underline underline-offset-2">
                         {t.common.viewFullPolicy}
                       </Link>
                     </div>

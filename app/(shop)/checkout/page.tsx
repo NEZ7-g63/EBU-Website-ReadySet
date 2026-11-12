@@ -63,6 +63,7 @@ export default function CheckoutPage() {
   const [draftHydrated, setDraftHydrated] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(false);
+  const [agreed, setAgreed] = useState(false);
   const districts = useMemo(() => getDistrictsByProvinceCode(provinceCode), [provinceCode]);
   const wards = useMemo(() => getWardsByDistrictCode(provinceCode, districtCode), [provinceCode, districtCode]);
 
@@ -129,7 +130,7 @@ export default function CheckoutPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (submitting) return;
+    if (submitting || !agreed) return;
     setSubmitting(true);
     setSubmitError(false);
 
@@ -400,7 +401,23 @@ export default function CheckoutPage() {
               {t.checkout.orderSubmitError}
             </p>
           ) : null}
-          <Button type="submit" fullWidth className="mt-6" disabled={submitting}>
+          <label className="mt-6 flex cursor-pointer items-start gap-3 text-[13px] leading-[1.5]">
+            <input
+              type="checkbox"
+              required
+              checked={agreed}
+              onChange={(e) => setAgreed(e.target.checked)}
+              className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-black"
+            />
+            <span>
+              {t.checkout.agreePrefix}{" "}
+              <a href="/pages/policies" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">
+                {t.checkout.agreeLink}
+              </a>{" "}
+              {t.checkout.agreeSuffix}
+            </span>
+          </label>
+          <Button type="submit" fullWidth className="mt-4" disabled={submitting || !agreed}>
             {submitting ? t.checkout.placingOrder : t.checkout.placeOrder}
           </Button>
         </div>

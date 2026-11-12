@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getStaticPage, staticPages } from "@/lib/data/pages";
+import { getStaticPage, staticPages, type StaticSection } from "@/lib/data/pages";
 import { company } from "@/lib/data/company";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { FacebookIcon } from "@/components/ui/FacebookIcon";
@@ -96,25 +96,73 @@ export default async function StaticPageRoute({ params }: Props) {
       </h1>
       {page.intro ? <p className="mb-10 text-center text-[15px] text-ink-60">{page.intro}</p> : <div className="mb-10" />}
 
-      <div className="space-y-10">
-        {page.sections.map((section) => (
-          <section key={section.heading}>
-            <h2 className="mb-3 text-[15px] font-medium uppercase tracking-[0.05em]">{section.heading}</h2>
-            <div className="space-y-3 text-[15px] leading-[1.7] text-ink-60">
-              {section.paragraphs.map((p, i) => (
-                <p key={i}>{p}</p>
-              ))}
-              {section.list ? (
-                <ul className="list-inside list-disc space-y-1">
-                  {section.list.map((item, i) => (
-                    <li key={i}>{item}</li>
+      {page.groups ? (
+        <>
+          <nav aria-label={page.title} className="mb-12 flex flex-wrap justify-center gap-x-6 gap-y-2 border-y border-line py-4">
+            {page.groups.map((group) => (
+              <a key={group.id} href={`#${group.id}`} className="nav-link underline-offset-4 hover:underline">
+                {group.title}
+              </a>
+            ))}
+          </nav>
+          <div className="space-y-16">
+            {page.groups.map((group) => (
+              <section key={group.id} id={group.id} className="scroll-mt-24">
+                <h2 className="mb-8 border-b border-line pb-3 text-[20px] font-medium uppercase tracking-[0.06em]">{group.title}</h2>
+                <div className="space-y-10">
+                  {group.sections.map((section) => (
+                    <PolicySection key={section.heading} section={section} />
                   ))}
-                </ul>
-              ) : null}
-            </div>
-          </section>
-        ))}
-      </div>
+                </div>
+              </section>
+            ))}
+          </div>
+        </>
+      ) : (
+        <div className="space-y-10">
+          {page.sections.map((section) => (
+            <PolicySection key={section.heading} section={section} />
+          ))}
+        </div>
+      )}
     </div>
+  );
+}
+
+function PolicySection({ section }: { section: StaticSection }) {
+  return (
+    <section>
+      <h3 className="mb-3 text-[15px] font-medium uppercase tracking-[0.05em]">{section.heading}</h3>
+      <div className="space-y-3 text-[15px] leading-[1.7] text-ink-60">
+        {section.paragraphs.map((p, i) => {
+          const isLast = i === section.paragraphs.length - 1;
+          if (section.facebookLink && company.facebook && isLast) {
+            return (
+              <p key={i} className="flex flex-wrap items-center gap-2">
+                <span>{p}</span>
+                <a
+                  href={company.facebook.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Facebook ${company.facebook.label}`}
+                  title={`Facebook ${company.facebook.label}`}
+                  className="inline-flex text-ink hover:text-ink-60"
+                >
+                  <FacebookIcon className="h-6 w-6" />
+                </a>
+              </p>
+            );
+          }
+          return <p key={i}>{p}</p>;
+        })}
+        {section.list ? (
+          <ul className="list-inside list-disc space-y-1">
+            {section.list.map((item, i) => (
+              <li key={i}>{item}</li>
+            ))}
+          </ul>
+        ) : null}
+      </div>
+    </section>
   );
 }
