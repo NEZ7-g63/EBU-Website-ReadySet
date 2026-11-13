@@ -7,7 +7,7 @@ import { company } from "@/lib/data/company";
 const BASE_URL = company.siteUrl;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const staticRoutes: MetadataRoute.Sitemap = ["", "/campaign", "/pages/contact"].map((path) => ({
+  const staticRoutes: MetadataRoute.Sitemap = ["", "/pages/contact"].map((path) => ({
     url: `${BASE_URL}${path}`,
     lastModified: new Date(),
   }));

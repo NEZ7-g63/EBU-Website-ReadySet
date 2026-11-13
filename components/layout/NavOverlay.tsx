@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { IconChevronDown, IconClose } from "@/components/ui/icons";
+import { IconClose } from "@/components/ui/icons";
 import { Placeholder } from "@/components/ui/Placeholder";
 import { navCollections } from "@/lib/data/collections";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
@@ -15,13 +15,6 @@ const SHOP_LINKS = navCollections.map((c) => ({
   tone: c.tone,
   handle: c.handle,
 }));
-
-// Tên tạm — đổi lại khi có tên chính thức cho từng lookbook.
-const LOOKBOOKS = [
-  { label: "0.1", href: "/campaign" },
-  { label: "0.2", href: "/campaign2" },
-  { label: "0.3", href: "/campaign3" },
-];
 
 export function NavOverlay({
   isOpen,
@@ -37,7 +30,6 @@ export function NavOverlay({
 }) {
   const { dict: t, locale, setLocale } = useLocale();
   const [hovered, setHovered] = useState(SHOP_LINKS[0]);
-  const [lookbookOpen, setLookbookOpen] = useState(false);
   const otherLinks = [
     { label: t.nav.about, href: "/pages/about" },
     { label: t.nav.trackOrder, href: "/track-order" },
@@ -85,43 +77,6 @@ export function NavOverlay({
               >
                 {shopLinkLabel(SHOP_LINKS[0].handle, SHOP_LINKS[0].label)}
               </Link>
-
-              {/* Lookbook đứng ngay dưới "Tất cả sản phẩm", trước các danh mục còn lại. */}
-              <div>
-                <button
-                  type="button"
-                  onClick={() => setLookbookOpen((v) => !v)}
-                  aria-expanded={lookbookOpen}
-                  className="flex items-center gap-2 text-[28px] font-medium uppercase leading-tight tracking-wide hover:text-white/60 md:text-[36px]"
-                >
-                  {t.nav.lookbook}
-                  <IconChevronDown className={`h-4 w-4 transition-transform ${lookbookOpen ? "rotate-180" : ""}`} />
-                </button>
-                <AnimatePresence initial={false}>
-                  {lookbookOpen ? (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="overflow-hidden"
-                    >
-                      <div className="flex flex-col gap-2 py-2 pl-4">
-                        {LOOKBOOKS.map((c) => (
-                          <Link
-                            key={c.href}
-                            href={c.href}
-                            onClick={onClose}
-                            className="text-[16px] uppercase tracking-wide text-white/60 hover:text-white"
-                          >
-                            {t.nav.lookbook} {c.label}
-                          </Link>
-                        ))}
-                      </div>
-                    </motion.div>
-                  ) : null}
-                </AnimatePresence>
-              </div>
 
               {SHOP_LINKS.slice(1).map((item) => (
                 <Link

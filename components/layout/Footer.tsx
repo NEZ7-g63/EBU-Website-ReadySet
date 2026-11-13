@@ -35,7 +35,6 @@ export function Footer() {
     { label: t.nav.contact, href: "/pages/contact" },
   ];
   const aboutLinks = [
-    { label: t.nav.lookbook, href: "/campaign" },
     ...(company.facebook ? [{ label: "Facebook", href: company.facebook.url }] : []),
     ...(company.instagram ? [{ label: t.nav.instagram, href: company.instagram.url }] : []),
   ];

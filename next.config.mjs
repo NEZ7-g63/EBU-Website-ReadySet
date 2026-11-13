@@ -30,6 +30,9 @@ const nextConfig = {
       { source: "/pages/shipping-returns", destination: "/pages/policies#shipping", permanent: false },
       { source: "/pages/return-policy", destination: "/pages/policies#returns", permanent: false },
       { source: "/pages/privacy", destination: "/pages/policies#privacy", permanent: false },
+      { source: "/campaign", destination: "/", permanent: false },
+      { source: "/campaign2", destination: "/", permanent: false },
+      { source: "/campaign3", destination: "/", permanent: false },
     ];
   },
   experimental: {

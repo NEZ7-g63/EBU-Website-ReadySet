@@ -287,8 +287,8 @@ export const SEED_PRODUCTS: RawProduct[] = [
     sizes: ["1", "2", "3"],
     unavailableSizes: [],
     sizeChart: HOODIE_ZIP_SIZE_CHART,
-    material: "Đang cập nhật", // TẠM: chưa có thông tin chất liệu thật của áo hoodie
-    materialEn: "To be updated",
+    material: "Vải 100% Cotton French Terry (380 – 420 GSM)",
+    materialEn: "100% Cotton French Terry (380 – 420 GSM)",
     care: "Đang cập nhật",
     careEn: "To be updated",
     fit: "Oversized",
@@ -331,8 +331,8 @@ export const SEED_PRODUCTS: RawProduct[] = [
     sizes: ["1", "2", "3"],
     unavailableSizes: [],
     sizeChart: BOMBER_SIZE_CHART,
-    material: "Đang cập nhật", // TẠM: chưa có thông tin chất liệu thật của áo khoác
-    materialEn: "To be updated",
+    material: "Micro Polyester",
+    materialEn: "Micro Polyester",
     care: "Đang cập nhật",
     careEn: "To be updated",
     fit: "Oversized",
